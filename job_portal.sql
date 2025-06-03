@@ -48,3 +48,4 @@ CREATE TABLE applications (
     FOREIGN KEY (job_post_id) REFERENCES job_posts(id) ON DELETE CASCADE,
     UNIQUE(candidate_id, job_post_id) 
 );
+
