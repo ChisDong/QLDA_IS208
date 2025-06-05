@@ -16,6 +16,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 
 @Entity
 @Getter
@@ -27,8 +28,13 @@ public class users {
    @Id
     private int id; 
     private String name;
-    private String loginName;
-    private String passwordHash;
+
+    @Column(name = "username", unique = true, nullable = false)
+    private String username;
+
+    @Column(name = "password", nullable = false)
+    private String password;
+
     private String email;
     private String phone;
 

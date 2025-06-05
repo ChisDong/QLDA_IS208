@@ -34,10 +34,10 @@ public class AuthenticationController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @PostMapping("/signin")
+    @PostMapping("/login")
     public ResponseEntity<String> authenticateUser(@RequestBody LoginDTO loginDto){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginDto.getLoginName(), loginDto.getPasswordHash()));
+                loginDto.getUsername(), loginDto.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new ResponseEntity<>("User signed-in successfully!.", HttpStatus.OK);
@@ -47,7 +47,7 @@ public class AuthenticationController {
     public ResponseEntity<?> registerUser(@RequestBody SignUpDTO signUpDto){
 
         // Kiểm tra xem tên đăng nhập đã tồn tại trong cơ sở dữ liệu chưa
-        if(userRepository.existsByLoginName(signUpDto.getLoginName())){
+        if(userRepository.existsByUsername(signUpDto.getUsername())){
             return new ResponseEntity<>("Username is already taken!", HttpStatus.BAD_REQUEST);
         }
 
@@ -59,9 +59,9 @@ public class AuthenticationController {
         // Tạo người dùng mới
         users user = new users();
         user.setName(signUpDto.getName());
-        user.setLoginName(signUpDto.getLoginName());
+        user.setUsername(signUpDto.getUsername());
         user.setEmail(signUpDto.getEmail());
-        user.setPasswordHash(passwordEncoder.encode(signUpDto.getPasswordHash()));
+        user.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
 
         userRepository.save(user);
 
