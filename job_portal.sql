@@ -1,3 +1,6 @@
+DROP DATABASE IF EXISTS job_portal;
+CREATE DATABASE job_portal;
+USE job_portal;
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
