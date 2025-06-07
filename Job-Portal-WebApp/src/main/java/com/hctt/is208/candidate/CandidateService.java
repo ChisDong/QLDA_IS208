@@ -8,15 +8,10 @@ import java.nio.file.StandardCopyOption;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Objects;
 
 @Service
 public class CandidateService {
-
-    @Autowired
-    private CandidateRepository candidateRepository;
 
     private static final String CV_STORAGE_DIR = "C:\\Storage";
 
