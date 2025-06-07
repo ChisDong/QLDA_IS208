@@ -1,7 +1,6 @@
-package com.hctt.is208.authentication.repository;
+package com.hctt.is208.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.hctt.is208.authentication.entity.users;
 
 public interface UsersRepository extends JpaRepository<users, Integer>{
     users findByUsername(String username);

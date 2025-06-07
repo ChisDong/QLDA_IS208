@@ -1,6 +1,5 @@
-package com.hctt.is208.authentication.controller;
+package com.hctt.is208.authentication;
 
-import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hctt.is208.authentication.DTO.LoginDTO;
 import com.hctt.is208.authentication.DTO.SignUpDTO;
-import com.hctt.is208.authentication.entity.users;
-import com.hctt.is208.authentication.repository.UsersRepository;
+import com.hctt.is208.user.UsersRepository;
+import com.hctt.is208.user.users;
 
 @RestController
 @RequestMapping("/api/auth")

@@ -1,4 +1,6 @@
-package com.hctt.is208.authentication.entity;
+package com.hctt.is208.recruiter;
+
+import com.hctt.is208.user.users;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

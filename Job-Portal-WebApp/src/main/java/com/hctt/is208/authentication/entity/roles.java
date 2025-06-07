@@ -8,6 +8,8 @@ import lombok.Setter;
 
 import java.util.List;
 
+import com.hctt.is208.user.users;
+
 @Getter
 @Setter
 @NoArgsConstructor
