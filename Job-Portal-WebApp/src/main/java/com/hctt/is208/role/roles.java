@@ -1,4 +1,4 @@
-package com.hctt.is208.authentication.entity;
+package com.hctt.is208.role;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

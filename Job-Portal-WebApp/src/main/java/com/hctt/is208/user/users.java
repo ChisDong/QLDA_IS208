@@ -9,13 +9,16 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hctt.is208.authentication.entity.roles;
+import com.hctt.is208.candidate.candidates;
+import com.hctt.is208.recruiter.recruiters;
+import com.hctt.is208.role.roles;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -59,6 +62,12 @@ public class users {
         inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private List<roles> roles = new ArrayList<>();
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private candidates candidate;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private recruiters recruiter;
 
     public enum Role {
         candidate, recruiter
