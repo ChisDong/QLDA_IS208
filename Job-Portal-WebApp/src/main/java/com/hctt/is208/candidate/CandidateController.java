@@ -25,9 +25,6 @@ public class CandidateController {
     @Autowired
     private CandidateService candidateService;
 
-    @Autowired
-    private CandidateRepository candidateRepository;
-
     public CandidateController(CandidateService candidateService) {
         this.candidateService = candidateService;
     }
