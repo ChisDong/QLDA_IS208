@@ -28,7 +28,8 @@ public class ApplicationService {
     public void cancelApplication(Integer applicationId, Integer candidateId) {
         Application app = applicationRepository.findById(applicationId)
                 .orElseThrow(() -> new RuntimeException("Application not found"));
-        if (!app.getCandidate().getId().equals(candidateId)) {
+        // if (!app.getCandidate().getId().equals(candidateId)) {
+        if (app.getCandidate().getId() != candidateId) {
             throw new RuntimeException("Not allowed");
         }
         applicationRepository.deleteById(applicationId);

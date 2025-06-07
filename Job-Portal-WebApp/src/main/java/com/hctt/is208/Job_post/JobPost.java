@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import com.hctt.is208.entity.Recruiter;
+import com.hctt.is208.recruiter.recruiters;
 
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
@@ -18,7 +18,7 @@ public class JobPost {
 
     @ManyToOne
     @JoinColumn(name = "recruiter_id")
-    private Recruiter recruiter;
+    private recruiters recruiter;
 
     private String title;
     private String description;
@@ -86,11 +86,11 @@ public class JobPost {
         this.deadline = deadline;
     }
 
-    public Recruiter getRecruiter() {
+    public recruiters getRecruiter() {
         return recruiter;
     }
 
-    public void setRecruiter(Recruiter recruiter) {
+    public void setRecruiter(recruiters recruiter) {
         this.recruiter = recruiter;
     }
 

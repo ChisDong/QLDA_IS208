@@ -2,8 +2,9 @@ package com.hctt.is208.applications;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.hctt.is208.dto.CandidateInfoDTO;
 import com.hctt.is208.Job_post.JobPostInfoDTO;
+import com.hctt.is208.candidate.CandidatesDTO;
+
 import java.util.stream.Collectors;
 
 import java.util.List;
@@ -33,10 +34,10 @@ public class ApplicationController {
     }
 
     @GetMapping("/job/{jobPostId}/candidates")
-    public List<CandidateInfoDTO> getCandidatesByJobPost(@PathVariable Integer jobPostId) {
+    public List<CandidatesDTO> getCandidatesByJobPost(@PathVariable Integer jobPostId) {
         List<Application> applications = applicationService.getApplicationsByJobPost(jobPostId);
         return applications.stream()
-                .map(app -> new CandidateInfoDTO(
+                .map(app -> new CandidatesDTO(
                         app.getCandidate().getId(),
                         app.getCandidate().getName(),
                         app.getCandidate().getEmail()

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 import com.hctt.is208.Job_post.JobPost;
-import com.hctt.is208.entity.Candidate;
+import com.hctt.is208.candidate.candidates;
 
 @Entity
 @Table(name = "applications", uniqueConstraints = {
@@ -17,7 +17,7 @@ public class Application {
 
     @ManyToOne
     @JoinColumn(name = "candidate_id", nullable = false)
-    private Candidate candidate;
+    private candidates candidate;
 
     @ManyToOne
     @JoinColumn(name = "job_post_id", nullable = false)
@@ -46,11 +46,11 @@ public class Application {
         this.id = id;
     }
 
-    public Candidate getCandidate() {
+    public candidates getCandidate() {
         return candidate;
     }
 
-    public void setCandidate(Candidate candidate) {
+    public void setCandidate(candidates candidate) {
         this.candidate = candidate;
     }
 
