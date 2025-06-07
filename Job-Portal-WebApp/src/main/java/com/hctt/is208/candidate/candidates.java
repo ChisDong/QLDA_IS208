@@ -1,4 +1,4 @@
-package com.hctt.is208.authentication.entity;
+package com.hctt.is208.candidate;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+
+import com.hctt.is208.user.users;
 
 @Entity
 @Getter

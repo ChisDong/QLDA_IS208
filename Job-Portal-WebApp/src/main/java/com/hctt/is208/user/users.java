@@ -1,14 +1,19 @@
-package com.hctt.is208.authentication.entity;
+package com.hctt.is208.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.hctt.is208.authentication.entity.roles;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
@@ -35,8 +40,17 @@ public class users {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "email", unique = true)
     private String email;
+
+    @Column(name = "phone")
     private String phone;
+    
+    @Enumerated(EnumType.STRING)
+    private Role role;
+    
+    @Column(name = "created_at")
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -45,5 +59,9 @@ public class users {
         inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private List<roles> roles = new ArrayList<>();
+
+    public enum Role {
+        candidate, recruiter
+    }
 }
 

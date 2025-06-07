@@ -1,4 +1,4 @@
-package com.hctt.is208.authentication.service;
+package com.hctt.is208.authentication;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -10,8 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.hctt.is208.authentication.entity.users;
-import com.hctt.is208.authentication.repository.UsersRepository;
+import com.hctt.is208.user.UsersRepository;
+import com.hctt.is208.user.users;
 
 @Service
 public class CustomUserDetailService implements UserDetailsService{

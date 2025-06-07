@@ -44,6 +44,7 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.POST, "/api/auth/signup").permitAll()
                                 .anyRequest().authenticated()
                 )
+                .httpBasic(org.springframework.security.config.Customizer.withDefaults())
                 .userDetailsService(userDetailsService)
                 .build();
     }

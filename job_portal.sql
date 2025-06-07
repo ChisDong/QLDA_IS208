@@ -4,8 +4,10 @@ USE job_portal;
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    login_name VARCHAR(255) NOT NULL,
-    password_hash VARCHAR(255) NOT NULL,    
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,  
+    email VARCHAR(255) UNIQUE NOT NULL,
+    phone VARCHAR(20),  
     role ENUM('candidate', 'recruiter') NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
@@ -13,8 +15,6 @@ CREATE TABLE users (
 CREATE TABLE candidates (
     id INT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    phone VARCHAR(20),
     dob DATE,
     address TEXT,
     cv_file_path VARCHAR(255),
@@ -24,8 +24,6 @@ CREATE TABLE candidates (
 CREATE TABLE recruiters (
     id INT PRIMARY KEY,
     company_name VARCHAR(255),
-    phone VARCHAR(20),
-    email VARCHAR(255),
     FOREIGN KEY (id) REFERENCES users(id) ON DELETE CASCADE
 );
 
