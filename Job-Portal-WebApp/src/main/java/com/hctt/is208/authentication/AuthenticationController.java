@@ -35,11 +35,17 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<String> authenticateUser(@RequestBody LoginDTO loginDto){
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginDto.getUsername(), loginDto.getPassword()));
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new ResponseEntity<>("User signed-in successfully!.", HttpStatus.OK);
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                    loginDto.getUsername(), loginDto.getPassword()
+                )
+            );
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            return new ResponseEntity<>("User signed-in successfully!.", HttpStatus.OK);
+        } catch (Exception ex) {
+            return new ResponseEntity<>("Invalid username or password!", HttpStatus.UNAUTHORIZED);
+        }
     }
 
     @PostMapping("/signup")
