@@ -20,6 +20,12 @@ public class candidates {
     @Id
     private int id;
 
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "email")
+    private String email;
+
     @Column(name = "dob")
     private LocalDate dob;
 
