@@ -8,8 +8,6 @@ import java.nio.file.StandardCopyOption;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-// import jakarta.persistence.criteria.Path; // Remove this line
-import java.nio.file.Path;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Objects;
@@ -38,12 +36,7 @@ public class CandidateService {
 
 
 
-    public File getDownloadCV(int candidateId, String fileName) throws Exception{
-        candidates candidate = candidateRepository.findById(candidateId);
-        if (candidate == null) {
-            throw new RuntimeException("Candidate not found with ID: " + candidateId);
-        }
-
+    public File getDownloadCV(String fileName) throws Exception{
         if (fileName == null || fileName.isEmpty()) {
             throw new NullPointerException("File name cannot be null or empty");
         }

@@ -1,5 +1,7 @@
 package com.hctt.is208.candidate;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -7,7 +9,9 @@ import java.nio.file.Path;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,14 +25,18 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/api/candidates")
 public class CandidateController {
 
-    private final CandidateService candidateService;
+    @Autowired
+    private CandidateService candidateService;
+
+    @Autowired
+    private CandidateRepository candidateRepository;
 
     public CandidateController(CandidateService candidateService) {
         this.candidateService = candidateService;
     }
 
     @PostMapping("/{id}/upload-cv")
-    public   ResponseEntity<String> uploadCv(@PathVariable int id, @RequestParam("file") MultipartFile file) {
+    public   ResponseEntity<String> uploadCv(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
             return ResponseEntity.badRequest().body("File is empty");
         }
@@ -42,7 +50,7 @@ public class CandidateController {
     }
 
     @GetMapping("/{id}/list-cv")
-    public ResponseEntity<?> listFiles(@PathVariable int id) throws IOException {
+    public ResponseEntity<?> listFiles() throws IOException {
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(Path.of("C:\\Storage"))) {
             var files = StreamSupport.stream(stream.spliterator(), false)
                             .map(Path::getFileName)
@@ -53,9 +61,9 @@ public class CandidateController {
     }
 
     @GetMapping("/{id}/download-cv")
-    public ResponseEntity<Resource> downloadCV(@PathVariable int id, @RequestParam("fileName") String fileName) {
+    public ResponseEntity<Resource> downloadCV(@RequestParam("fileName") String fileName) {
         try {
-            var fileToDownload = candidateService.getDownloadCV(id, fileName);
+            var fileToDownload = candidateService.getDownloadCV(fileName);
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileToDownload.getName() + "\"")
                     .contentLength(fileToDownload.length())
@@ -65,4 +73,5 @@ public class CandidateController {
             return ResponseEntity.notFound().build();
         }
     }
+
 }
