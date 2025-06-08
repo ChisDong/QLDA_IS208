@@ -20,15 +20,10 @@ public class roles {
     @Id
     private int id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "name", nullable = false, unique = true)
-    private RoleType name;
+    @Column(nullable = false, unique = true)
+    private String name;
 
     @ManyToMany(mappedBy = "roles")
     private List<users> users;
 
-    public enum RoleType {
-        candidates,
-        recruiters
-    }
 }

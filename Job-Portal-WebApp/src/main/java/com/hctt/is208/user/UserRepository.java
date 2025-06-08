@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UsersRepository extends JpaRepository<users, Integer>{
+public interface UserRepository extends JpaRepository<users, Integer>{
     users findByUsername(String username);
     users findByEmail(String email);
     boolean existsByUsername(String username);
