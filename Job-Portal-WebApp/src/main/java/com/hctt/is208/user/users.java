@@ -48,10 +48,7 @@ public class users {
 
     @Column(name = "phone")
     private String phone;
-    
-    @Enumerated(EnumType.STRING)
-    private Role role;
-    
+
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 
@@ -63,14 +60,5 @@ public class users {
     )
     private List<roles> roles = new ArrayList<>();
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private candidates candidate;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private recruiters recruiter;
-
-    public enum Role {
-        candidate, recruiter
-    }
 }
 

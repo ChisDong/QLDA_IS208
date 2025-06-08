@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hctt.is208.authentication.DTO.LoginDTO;
 import com.hctt.is208.authentication.DTO.SignUpDTO;
-import com.hctt.is208.user.UsersRepository;
+import com.hctt.is208.user.UserRepository;
 import com.hctt.is208.user.users;
 
 @RestController
@@ -27,7 +27,7 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private UsersRepository userRepository;
+    private UserRepository userRepository;
 
 
     @Autowired
