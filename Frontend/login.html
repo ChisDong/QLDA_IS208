@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - HCTT</title>
-    <link rel="stylesheet" href="login.css" />
+    <link rel="stylesheet" href="./assests/css/login.css" />
 </head>
 
 <body>
@@ -18,10 +18,9 @@
         <form class="login-box" onsubmit="return handleLogin(event)">
             <h2>Welcome back!</h2>
 
-            <label>Email address</label>
+            <label>Username</label>
             <div class="input-group">
-                <input type="email" id="email" placeholder="example@mail.com" required />
-                <span id="email-check" class="icon hidden">✔</span>
+                <input type="text" id="username" placeholder="Enter your username" required />
             </div>
 
             <label>Password</label>
@@ -30,14 +29,13 @@
                 <span id="toggle-password" class="icon">👁</span>
             </div>
 
-            <small>Use at least 8 characters with 1 number, and one special character.</small>
 
             <button type="submit">LOG IN</button>
             <a href="#">Forgot password?</a>
         </form>
     </div>
 
-    <script src="login.js"></script>
+    <script src="./assests/js/login.js"></script>
 </body>
 
 </html>

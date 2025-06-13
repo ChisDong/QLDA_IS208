@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CV Management</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/assests/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 
@@ -16,7 +16,7 @@
         <a href="index.html" class="logo" id="homelogo">HCTT</a>
         <nav class="main-nav">
           <ul>
-            <li><a href="cv_management.html">CV Management </a></li>
+            <li><a href="cv_management.html">CV Management</a></li>
             <li><a href="applied_jobs.html">Applied Job</a></li>
           </ul>
         </nav>
@@ -27,121 +27,35 @@
           <i class="fas fa-chevron-down"></i>
         </div>
         <div class="dropdown-menu">
-          <a href="login.html" class="logout-item">
-            <i class="fas fa-sign-out-alt"></i> Logout
-          </a>
+          <a href="login.html" class="logout-item" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </div>
       </div>
     </div>
   </header>
 
   <main class="container">
-    <h2><i class="fas fa-id-card"></i> Quản lý CV</h2>
+    <h2><i class="fas fa-id-card"></i> Quản lý CV của bạn</h2>
 
-    <div class="cv-upload">
-      <input type="file" id="cvFile" />
-      <button onclick="uploadCV()"><i class="fas fa-upload"></i> Upload CV</button>
+    <div id="candidate-info">
+      <p><strong>Họ tên:</strong> <span id="candidateName">Đang tải...</span></p>
+      <p><strong>Email:</strong> <span id="candidateEmail">Đang tải...</span></p>
     </div>
 
-    <table class="cv-table">
-      <thead>
-        <tr>
-          <th>Họ tên</th>
-          <th>Email</th>
-          <th>Tên file</th>
-          <th>Hành động</th>
-        </tr>
-      </thead>
-      <tbody id="cvList">
-        <tr>
-          <td colspan="4" style="text-align:center;">Đang tải...</td>
-        </tr>
-      </tbody>
-    </table>
+    <hr style="margin: 20px 0;">
+
+    <div class="cv-upload">
+      <input type="file" id="cvFile" accept=".pdf,.doc,.docx" style="display:none;" />
+      <button id="uploadBtn"><i class="fas fa-upload"></i> Tải lên hoặc thay thế CV</button>
+    </div>
+
+    <div id="current-cv-section">
+      <h4>CV hiện tại</h4>
+      <div id="cv-details">
+      </div>
+    </div>
   </main>
 
-  <script>
-    async function loadCVs() {
-      const tableBody = document.getElementById("cvList");
-      try {
-        const res = await fetch("http://localhost:8080/api/cvs");
-        const data = await res.json();
-
-        if (!data.length) {
-          tableBody.innerHTML = `<tr><td colspan="4" class="empty-state"><i class="fas fa-file"></i><p>Chưa có CV nào</p></td></tr>`;
-          return;
-        }
-
-        tableBody.innerHTML = data.map(cv => `
-          <tr>
-            <td>${cv.name}</td>
-            <td>${cv.email}</td>
-            <td>${cv.filename}</td>
-            <td>
-              <button class="action-btn view" onclick="viewCV('${cv.id}')"><i class="fas fa-eye"></i></button>
-              <button class="action-btn download" onclick="downloadCV('${cv.id}')"><i class="fas fa-download"></i></button>
-              <button class="action-btn delete" onclick="deleteCV('${cv.id}')"><i class="fas fa-trash-alt"></i></button>
-            </td>
-          </tr>
-        `).join("");
-      } catch (err) {
-        tableBody.innerHTML = `<tr><td colspan="4" style="color:red;">Lỗi tải CV!</td></tr>`;
-      }
-    }
-
-    async function uploadCV() {
-      const fileInput = document.getElementById("cvFile");
-      if (!fileInput.files.length) {
-        alert("Vui lòng chọn file CV");
-        return;
-      }
-
-      const formData = new FormData();
-      formData.append("file", fileInput.files[0]);
-
-      try {
-        const res = await fetch("http://localhost:8080/api/cvs", {
-          method: "POST",
-          body: formData,
-        });
-
-        if (res.ok) {
-          alert("Tải CV thành công");
-          fileInput.value = "";
-          loadCVs();
-        } else {
-          alert("Tải CV thất bại");
-        }
-      } catch (err) {
-        alert("Lỗi kết nối khi upload CV");
-      }
-    }
-
-    async function deleteCV(id) {
-      if (!confirm("Bạn có chắc chắn muốn xóa CV này?")) return;
-
-      const res = await fetch(`http://localhost:8080/api/cvs/${id}`, {
-        method: "DELETE"
-      });
-
-      if (res.ok) {
-        alert("Đã xóa CV");
-        loadCVs();
-      } else {
-        alert("Xóa thất bại");
-      }
-    }
-
-    function downloadCV(id) {
-      window.open(`http://localhost:8080/api/cvs/${id}/download`, "_blank");
-    }
-
-    function viewCV(id) {
-      window.open(`http://localhost:8080/api/cvs/${id}/preview`, "_blank");
-    }
-
-    document.addEventListener("DOMContentLoaded", loadCVs);
-  </script>
+  <script src="/assests/js/cv.js"></script>
 </body>
 
 </html>
